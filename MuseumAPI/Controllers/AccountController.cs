@@ -95,8 +95,7 @@ namespace MuseumAPI.Controllers
             }
 
             // 3. User Logic
-            var customer = await _context.Customers
-                .FirstOrDefaultAsync(x => x.Email == payload.Email);
+            var customer = await _context.Customers.FirstOrDefaultAsync(x => x.Email == payload.Email);
 
             if (customer == null)
             {
@@ -143,9 +142,7 @@ namespace MuseumAPI.Controllers
 
             // 3. Create Token Descriptor
             // If "Jwt:DurationInMinutes" isn't in your JSON, it defaults to 60 minutes
-            var duration = _configuration["Jwt:DurationInMinutes"] != null
-                           ? Convert.ToDouble(_configuration["Jwt:DurationInMinutes"])
-                           : 60;
+            var duration = _configuration["Jwt:DurationInMinutes"] != null ? Convert.ToDouble(_configuration["Jwt:DurationInMinutes"]) : 60;
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
