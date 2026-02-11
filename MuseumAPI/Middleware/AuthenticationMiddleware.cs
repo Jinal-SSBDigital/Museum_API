@@ -84,9 +84,7 @@ namespace MuseumAPI.Middleware
             }
 
             // 2️⃣ Allow public endpoints (NO TOKEN REQUIRED)
-            if (path.StartsWith("/api/account/login") ||
-                path.StartsWith("/api/account/register") ||
-                path.StartsWith("/api/account/google-login"))
+            if (path.StartsWith("/api/account/login") || path.StartsWith("/api/account/register") || path.StartsWith("/api/account/google-login"))
             {
                 await _next(context);
                 return;
@@ -95,8 +93,7 @@ namespace MuseumAPI.Middleware
             // 3️⃣ Check Authorization header
             var authHeader = context.Request.Headers["Authorization"].FirstOrDefault();
 
-            if (string.IsNullOrWhiteSpace(authHeader) ||
-                !authHeader.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase))
+            if (string.IsNullOrWhiteSpace(authHeader) || !authHeader.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase))
             {
                 context.Response.StatusCode = StatusCodes.Status401Unauthorized;
                 await context.Response.WriteAsync("Unauthorized: Missing token");
@@ -136,3 +133,4 @@ namespace MuseumAPI.Middleware
         }
     }
 }
+ 
