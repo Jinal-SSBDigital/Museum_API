@@ -25,8 +25,7 @@ public class LoginService : ILoginService
     public static bool VerifyPasswordHash( string password, byte[] storedHash,byte[] storedSalt)
     {
         using var hmac = new HMACSHA256(storedSalt);
-        var computedHash = hmac.ComputeHash(
-            System.Text.Encoding.UTF8.GetBytes(password));
+        var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
 
         return computedHash.SequenceEqual(storedHash);
     }
